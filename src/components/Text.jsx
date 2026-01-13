@@ -5,18 +5,36 @@ function Text() {
       const [text, setText] = useState('');
        const [wordCount, setWordCount] = useState(0)
   const [letterCount, setLetterCount] = useState(0)
+  const [load,setLoad]=useState(false)
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
+
       console.log(text)
         const handleSubmit = (e) => {
+         
     e.preventDefault() // prevent page reload
+    setLoad(true)
+    
+    if(text.trim()===''){
+      setLoad(false)
 
-    // Calculate word count
+      return
+    }
+    setTimeout(()=>{
+      // Calculate word count
     const words = text.trim().split(" ").filter(Boolean).length   // 2
 
     setWordCount(words)
 
     // Calculate letter count (excluding spaces)
     const letters = text.split("").filter(c => c !== " ").length
-    setLetterCount(letters)
+    setLetterCount(letters);
+    setLoad(false)
+    setHasSubmitted(true)
+
+    },1000)
+
+    
   }
     
   return (
@@ -42,13 +60,21 @@ function Text() {
                   Analyze
                 </button>
               </form>
+               <div>
+                  {load && <div className="spinner-border mt-3" role="status">
+  <span class="sr-only"></span>
+</div>}
 
-              {/* Display results */}
-              <div className="mt-4 p-3 border">
+               </div>
+               {!load && hasSubmitted &&(
+                <div className="mt-4 p-3 border">
                 <h5>Results:</h5>
                 <p>Word Count: {wordCount}</p>
                 <p>Letter Count: {letterCount}</p>
-              </div>
+              </div> 
+               ) }
+            
+         
             </div>
           </div>
         </div>
