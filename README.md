@@ -19,5 +19,6 @@ Open http://localhost:5173 in your browser.
 - Beginner-friendly React project
 
 ## Author
-Your Name  
-GitHub: https://github.com/your-username
+Priya 
+GitHub: https://github.com/priyadharshini-frontend
+
